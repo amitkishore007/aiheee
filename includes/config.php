@@ -34,4 +34,7 @@ $db = @mysql_connect(DBHOST,DBUSER,DBPASS) ;
 }
 
 mysql_select_db(DBNAME,$db);
+
+date_default_timezone_set('Asia/Calcutta');
+
 ?>

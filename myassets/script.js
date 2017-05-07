@@ -8,9 +8,9 @@ $('document').ready(function(){
 
          $('.error').html('');
          
-         var variable   =   [ "name", "fname", "country", "state", "city", "address", "pincode","email","num","day","month","year","category","last_exam","year_passing","percent_mark","annual_income","citizen","image","declare" ,"stu_dec_fname","stu_dec_name" ,"cource_choice","cordinator_id" ];      
+         var variable   =   [ "name", "fname", "state", "city", "address", "pincode","email","num","day","month","year","category","last_exam","year_passing","percent_mark","annual_income","citizen","image","declare" ,"stu_dec_fname","stu_dec_name" ,"cource_choice","cordinator_id" ];      
          // var variable   =   [ "name", "fname", "country", "state", "city", "address", "pincode","email","num","day","month","year","category","last_exam","year_passing","percent_mark","annual_income","citizen" ];      
-         var totalvar   =   24;
+         var totalvar   =   23;
          var focuscount =   0;
          var count      =   0;
           
@@ -168,10 +168,10 @@ $('document').ready(function(){
          
       });
 
-   $('#country').change(function(){
-    var id = $(this).val();
-    make_ajax_country(id,'state','state');
-   });
+   // $('#country').change(function(){
+   //  var id = $(this).val();
+   //  make_ajax_country(id,'state','state');
+   // });
 
    $('#state').change(function(){
     var id = $(this).val();
@@ -432,11 +432,6 @@ function validationRule() {
               required    :   true
             },
     
-    country : 
-            {
-              required    :   true
-            },
-    
     day : 
             {
               required    :   true
@@ -562,11 +557,6 @@ function validationMessage() {
     address : 
             {
               required    :   "Please enter your address"
-            },
-            
-    country:  
-            {
-              required    :   "Please select country",
             },
     
     day : 

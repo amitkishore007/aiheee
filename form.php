@@ -11,55 +11,7 @@
     <link rel="stylesheet" type="text/css" href="myassets/component.css" />
 
 </head>
-<style>
-.img1 {
-    background-color: #FFFEFC;
-    width: 150px;
-    height:180px;
-    border: 1px solid #9C9A9A;
-    padding: 15px;
-    margin: 15px;
-    float: right;
-    margin-right: 60px;
-}
 
-	.state{
-	    
-	}
-	.button {
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-}
-.soflow-color {
-   -webkit-appearance: button;
-   -webkit-border-radius: 2px;
-   -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
-   -webkit-padding-end: 20px;
-   -webkit-padding-start: 2px;
-   -webkit-user-select: none;
-   background-image: url(http://i62.tinypic.com/15xvbd5.png), -webkit-linear-gradient(#FAFAFA, #fffefc 40%, #fffefc);
-   background-position: 97% center;
-   background-repeat: no-repeat;
-   border: 2px solid #AAA;
-   color: #555;
-   font-size:22px;
-   margin: 20px;
-   overflow: hidden;
-   padding: 5px 10px;
-   text-overflow: ellipsis;
-   white-space: nowrap;
-   width: 300px;
-}
-
-</style>
 <body style="background-color: #FFFEFC;">
     <img src="images/logo.png" alt="AIHEEE">
 
@@ -128,21 +80,7 @@
           <div class="form-group">
             <label class="control-label col-md-2 col-md-offset-1"  for="country">Location        </label>
             <div class="col-md-8">
-             <div class="col-md-3 ">
-                <div class="form-group internal">
-                  <select class="form-control" id='country' name='country' data-type='select'>
-                    <option value=''>Country</option>
-                   <?php $countries = all_countries(); ?>
-                   <?php if ($countries) :  ?>
-                      <?php while($country = mysql_fetch_assoc($countries)): ?>
-                          <option value="<?php echo $country['id']; ?>"><?php echo $country['name']; ?></option>
-                      <?php endwhile; ?>
-                   <?php endif; ?>
-                  </select>
-                  
-              <span class='error' id='country-error'></span>
-                </div>
-              </div>
+             
               <div class="col-md-2 indent-small">
                 <div class="form-group internal">
                   <select class="form-control" id='state' name='state' data-type='select'>
@@ -173,6 +111,13 @@
                     
                   </select>
               <span class='error' id='city-error'></span>
+                </div>
+              </div>
+
+              <div class="col-md-3 ">
+                <div class="form-group internal">
+                  <input type="text" name='dist' id='dist' class="form-control" placeholder="District">  
+                  <span class='error' id='dist-error'></span>
                 </div>
               </div>
               <div class="clearfix"></div>
@@ -512,7 +457,9 @@
 
           
 
-        </div><!-- row end -->
+          </div><!-- row end -->
+
+
       </div>
 
     </div>

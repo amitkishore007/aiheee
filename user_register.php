@@ -124,7 +124,7 @@ if ($last_exam=='graduation') {
   if (!$user) {
 
     $output['status'] = 'false';
-    $output['cordinator'] = 'cordinator not found, please provide a valid cordinator id';
+    $output['cordinator'] = 'cordinator not found, please provide a valid cordinator id ';
     
 
   }
@@ -142,6 +142,14 @@ if ($last_exam=='graduation') {
 
      if ($result) {
        //return succes and redirect to payment 
+      $stu_id = mysql_insert_id();
+
+      $_SESSION['stu_id'] = $stu_id;
+      $_SESSION['name'] = $name;
+      $_SESSION['pincode'] = $pincode;
+      $_SESSION['phone'] = $num;
+      $_SESSION['email'] = $email;
+
 
       $output['status']     = 'true';
       $output['cordinator'] = 'successfuly registered !';
