@@ -6,7 +6,8 @@
 <!doctype html>
 <html>
 <head><title>All India Higher Education Entrance Examination | AIHEEE ( CET - 2017 ) | Application Form </title>
- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css"></link>
+ <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+ <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css"></link>
     <link rel="stylesheet" type="text/css" href="myassets/component.css" />
 
 </head>
@@ -62,10 +63,15 @@
 <body style="background-color: #FFFEFC;">
     <img src="images/logo.png" alt="AIHEEE">
 
+<div class="overlay loader-overlay">
+  <div class="loader">
+    <img src="images/loader.gif" alt="">
+  </div>
+</div>
 
 
 
-<div class="">
+<div class="main" id='main'>
     <div class="panel dialog-panel">
       <div class="panel-heading">
         <h4 class="text-center">ALL INDIA HIGHER EDUCATION ENTRANCE EXAMINATION</h5>
@@ -140,7 +146,21 @@
               <div class="col-md-2 indent-small">
                 <div class="form-group internal">
                   <select class="form-control" id='state' name='state' data-type='select'>
+                  <?php $country_id = 101; ?>
+                   <?php $query = "SELECT id, name FROM states WHERE country_id  = {$country_id} ORDER BY name DESC";  ?>
+                    <?php  $result = mysql_query($query); ?>
+                    <?php confirm($result); ?>
                     <option value=''>State</option>
+                    <?php  if (mysql_num_rows($result)>0): ?>
+                    
+                    <?php  while ($state = mysql_fetch_assoc($result)) : ?>
+                   
+                    <option value="<?php echo $state['id']; ?>"><?php echo $state['name']; ?></option>
+                   
+                    <?php endwhile; ?>
+
+                    <?php  endif; ?>
+
                     
                   </select>
                   <span class='error' id='state-error'></span>
@@ -212,7 +232,7 @@
               </div>
               <div class="col-md-2 indent-small">
                 <div class="form-group internal">
-                  <select class="form-control" id="year" id='year' data-type='select'></select>
+                  <select class="form-control" id="year" name='year' data-type='select'></select>
                   <span class='error' id='year-error'></span>
                 </div>
               </div>
@@ -239,9 +259,9 @@
                 <div class="form-group internal">
                   <select class="form-control" id='last_exam' name='last_exam' data-type='select'>
                     <option value=''>Choose</option>
-                    <option value=''>10th</option>
-                    <option value=''>12th</option>
-                    <option value=''>Graduation</option>
+                    <option value='tenth'>10th</option>
+                    <option value='twelve'>12th</option>
+                    <option value='graduation'>Graduation</option>
                     
                   </select>
                   <span class='error' id='last_exam-error'></span>
@@ -288,6 +308,13 @@
            <div class="col-md-8">
             <span >Details of last attended Institute / School / College.</span>
 
+                <span class='error tenth-error' id='tenth-error'></span>
+                <div class="clearfix"></div>
+                <span class='error twelve-error' id='twelve-error'></span>
+                <div class="clearfix"></div>
+                <span class='error graduation-error' id='graduation-error'></span>
+                <div class="clearfix"></div>
+
               <table class="table table-hover">
                 <thead>
                   <tr>
@@ -317,7 +344,7 @@
                     </td>
                     <td>
                      
-                      <input type="text" name='tent_year_passing' class="form-control" size="10" value="">
+                      <input type="text" name='ten_year_passing' class="form-control" size="10" value="">
                     </td>
                     <td>
                       <input type="text" name='ten_marks' class="form-control" size="10" value="">
@@ -414,11 +441,17 @@
         <div class="form-group">
             <label class="control-label col-md-2 col-md-offset-1" for="cource_choice">Choice Of Course :          </label>
             <div class="col-md-8">
-             <div class="col-md-3 ">
+             <div class="col-md-8 ">
                 <div class="form-group internal">
                   <select class="form-control" id='cource_choice' name='cource_choice' date-type='select'>
-                    <option value=''>Choose</option>
-                    
+                <?php $exams = all_exams(); ?>
+                
+                <?php if ($exams): ?>
+                          <option value=''>Choose</option>
+                        <?php while($exam = mysql_fetch_assoc($exams)): ?>
+                          <option value='<?php echo $exam['home_id']; ?>'><?php echo $exam['exam_content']; ?></option>
+                        <?php endwhile; ?>                
+                <?php endif; ?>
                   </select>
                   <span class="error " id='cource_choice-error'></span>
                 </div>
@@ -456,8 +489,11 @@
                   
                 </div>
 
-                <span class='error' id='ajax-error'></span>
-              </div>
+               
+                <span class='error cordinator-error' id='cordinator-error'></span>
+                <div class="clearfix"></div>
+               
+                 </div>
              
             </div>
           </div>
@@ -466,7 +502,7 @@
           <div class="form-group">
             <div class="col-md-offset-5 col-md-3">
             <input type="hidden" id='image' name='image' value=''>
-              <button class="btn-lg btn-success" name='submit' type="submit">Submit</button>
+              <button class="btn-lg btn-success form-submit" name='submit' type="submit">Submit</button>
             </div>
             
           </div>
@@ -499,32 +535,6 @@
   <script src="myassets/jquery.custom-file-input.js"></script>
   <script src="myassets/jquery.form.js"></script>
   <script src="myassets/script.js"></script>
-
-  <script>
-      $(document).ready(function() {
-        $.dobPicker({
-          daySelector: '#day', /* Required */
-          monthSelector: '#month', /* Required */
-          yearSelector: '#year', /* Required */
-          dayDefault: 'Day', /* Optional */
-          monthDefault: 'Month', /* Optional */
-          yearDefault: 'Year', /* Optional */
-          minimumAge: 12, /* Optional */
-          maximumAge: 80 /* Optional */
-        });
-
-        $.dobPicker({
-          // daySelector: '#day', /* Required */
-          // monthSelector: '#month', /* Required */
-          yearSelector: '#year_passing', /* Required */
-          // dayDefault: 'Day', /* Optional */
-          // monthDefault: 'Month', /* Optional */
-          yearDefault: 'Year of passing', /* Optional */
-          minimumAge: 12, /* Optional */
-          maximumAge: 80 /* Optional */
-        });
-      });
-    </script>
 
 </body>
 </html>

@@ -28,7 +28,7 @@ defined("DBPASS") ? null : define("DBPASS", "Support@123");
 
 }
 
-$db = mysql_connect(DBHOST,DBUSER,DBPASS) ;
+$db = @mysql_connect(DBHOST,DBUSER,DBPASS) ;
 	if(!$db){
 	die("unable to connect to database");
 }

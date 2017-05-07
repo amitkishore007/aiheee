@@ -99,7 +99,7 @@ label.control-label {
   right: 10%;
   top: 40%;
   text-align: center;
-  z-index: 999;
+  z-index: 998;
 }
 .image-div .profile-img{
   width: 200px;
@@ -129,6 +129,28 @@ label.control-label {
 .imgArea{
        display: none; 
     position: absolute;
-    top: 27px;
+    top: 35px;
     left: 15px;
 }
+.overlay{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    background-color: #dbe0dc;
+    opacity: 0.9;
+    z-index:999;
+    display: none;
+}
+#main{
+  z-index:997;
+}
+
+.loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 999;
+    
+ }

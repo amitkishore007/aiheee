@@ -282,3 +282,34 @@ function all_countries() {
 		return $result;
 	}
 }
+function all_exams() {
+	global $db;
+
+	$query = "SELECT home_id, exam_content FROM homepage ORDER BY created_at DESC";
+
+	$result = mysql_query($query);
+
+	confirm($result);
+
+	if (mysql_num_rows($result)>0) {
+		return $result;
+	}
+}
+
+function find_by_id($table, $field, $id) {
+	global $db;
+
+	$query = "SELECT {$field} FROM {$table} WHERE  {$field} = '{$id}' ";
+
+	$result   = mysql_query($query);
+
+	confirm($result);
+
+	if ($user  = mysql_fetch_assoc($result)) {
+		return $user;
+
+	} else {
+	
+		return false;
+	}
+}
